@@ -62,27 +62,26 @@
             this.toolStripSeparator3});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip2.Size = new System.Drawing.Size(1033, 42);
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStrip2.Size = new System.Drawing.Size(516, 39);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(57, 36);
+            this.toolStripLabel2.Size = new System.Drawing.Size(29, 36);
             this.toolStripLabel2.Text = "Port";
             // 
             // toolStripComboBoxPort
             // 
-            this.toolStripComboBoxPort.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripComboBoxPort.Name = "toolStripComboBoxPort";
-            this.toolStripComboBoxPort.Size = new System.Drawing.Size(238, 42);
+            this.toolStripComboBoxPort.Size = new System.Drawing.Size(121, 39);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripBtnConnect
             // 
@@ -90,14 +89,14 @@
             this.toolStripBtnConnect.Image = global::DDUEmulator.Properties.Resources._001_06;
             this.toolStripBtnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnConnect.Name = "toolStripBtnConnect";
-            this.toolStripBtnConnect.Size = new System.Drawing.Size(46, 36);
+            this.toolStripBtnConnect.Size = new System.Drawing.Size(36, 36);
             this.toolStripBtnConnect.Text = "toolStripButton1";
             this.toolStripBtnConnect.Click += new System.EventHandler(this.ToolStripBtnConnect_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripBtnDisconnect
             // 
@@ -106,43 +105,41 @@
             this.toolStripBtnDisconnect.Image = global::DDUEmulator.Properties.Resources._001_29;
             this.toolStripBtnDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnDisconnect.Name = "toolStripBtnDisconnect";
-            this.toolStripBtnDisconnect.Size = new System.Drawing.Size(46, 36);
+            this.toolStripBtnDisconnect.Size = new System.Drawing.Size(36, 36);
             this.toolStripBtnDisconnect.Text = "toolStripButton2";
             this.toolStripBtnDisconnect.Click += new System.EventHandler(this.ToolStripBtnDisconnect_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 42);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.rtfTerminal);
-            this.groupBox3.Location = new System.Drawing.Point(0, 58);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Location = new System.Drawing.Point(0, 42);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox3.Size = new System.Drawing.Size(1012, 175);
+            this.groupBox3.Size = new System.Drawing.Size(506, 177);
             this.groupBox3.TabIndex = 28;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Data out";
             // 
             // rtfTerminal
             // 
-            this.rtfTerminal.Location = new System.Drawing.Point(12, 37);
-            this.rtfTerminal.Margin = new System.Windows.Forms.Padding(6);
+            this.rtfTerminal.Location = new System.Drawing.Point(6, 19);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(984, 121);
+            this.rtfTerminal.Size = new System.Drawing.Size(494, 153);
             this.rtfTerminal.TabIndex = 9;
             this.rtfTerminal.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1033, 714);
+            this.ClientSize = new System.Drawing.Size(516, 371);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.toolStrip2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
