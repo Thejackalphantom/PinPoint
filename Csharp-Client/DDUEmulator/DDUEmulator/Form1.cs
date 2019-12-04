@@ -23,7 +23,9 @@ namespace DDUEmulator
         public enum LogMsgType { Incoming, Outgoing, Normal, Warning, Error };
 
 
-        private double degreeDDU = 0;
+        private int degreeDDU = 0;
+        private int inclinationDDU = 0;
+        private int hsnDDU = 0;
 
         public Form1()
         {
@@ -57,12 +59,20 @@ namespace DDUEmulator
             {
                 Console.WriteLine("Running");
                 
-                String dataOut = "$tab02,3.5," + degreeDDU.ToString() +  ",90.1\r\n";
+                String dataOut = "$tab02," + inclinationDDU.ToString() +  " ," + degreeDDU.ToString() +  "," + hsnDDU.ToString() +"\r\n";
 
-                if(degreeDDU <= 359.9)
-                {
-                    degreeDDU += 0.5;
-                }
+                //if(degreeDDU <= 359)
+                //{
+                //    degreeDDU += 1;
+                //}
+                //if (hsnDDU <= 359)
+                //{
+                //    hsnDDU += 1;
+                //}
+                //if (inclinationDDU <= 359)
+                //{
+                //    inclinationDDU += 1;
+                //}
 
                 serialPortDDU.Write(dataOut);
                 Log(LogMsgType.Incoming, dataOut);
@@ -168,6 +178,36 @@ namespace DDUEmulator
             catch
             {
             }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            degreeDDU = trackBar1.Value;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            hsnDDU = trackBar2.Value;
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            inclinationDDU = trackBar3.Value;
         }
     }
 }
