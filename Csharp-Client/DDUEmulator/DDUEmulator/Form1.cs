@@ -18,20 +18,37 @@ namespace DDUEmulator
         private Settings settings = Settings.Default;
 
         // Vars for logging
-        System.IO.TextWriter tw;
-        bool logFile = false;
+        //System.IO.TextWriter tw;
+        //bool logFile = false;
         public enum LogMsgType { Incoming, Outgoing, Normal, Warning, Error };
 
-
+        //Instanciates the variable's
         private int degreeDDU = 0;
         private int inclinationDDU = 0;
         private int hsnDDU = 0;
 
         public Form1()
         {
+            //Starts the Form
             InitializeComponent();
 
+            //Sets the label text to a default value the gods will be happy this is one.
+            label4.Text = "0";
+            label5.Text = "0";
+            label6.Text = "0";
             timerSentData.Enabled = true;
+
+            // Fixes the border so it cannot be resized.
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            // Set the MaximizeBox to false to remove the option to maximize the window.
+            MaximizeBox = false;
+
+            // Set the MinimizeBox to false to remove the option to minimize the window
+            MinimizeBox = false;
+
+            // Set the start position of the form to the center of the screen.
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void Log(LogMsgType msgtype, string msg)
@@ -58,21 +75,9 @@ namespace DDUEmulator
             if (serialPortDDU.IsOpen)
             {
                 Console.WriteLine("Running");
-                
-                String dataOut = "$tab02," + inclinationDDU.ToString() +  " ," + degreeDDU.ToString() +  "," + hsnDDU.ToString() +"\r\n";
 
-                //if(degreeDDU <= 359)
-                //{
-                //    degreeDDU += 1;
-                //}
-                //if (hsnDDU <= 359)
-                //{
-                //    hsnDDU += 1;
-                //}
-                //if (inclinationDDU <= 359)
-                //{
-                //    inclinationDDU += 1;
-                //}
+                //Sets the string that will be outputed via the serial controller with the inputed values
+                String dataOut = "$tab02,  " + inclinationDDU.ToString() + "," + degreeDDU.ToString() + "," + hsnDDU.ToString() + "\r\n";
 
                 serialPortDDU.Write(dataOut);
                 Log(LogMsgType.Incoming, dataOut);
@@ -154,7 +159,7 @@ namespace DDUEmulator
             {
                 if (serialPortDDU.IsOpen)
                 {
-                    
+
 
                     serialPortDDU.Close();
                     toolStripBtnDisconnect.Enabled = false;
@@ -180,34 +185,25 @@ namespace DDUEmulator
             }
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //sets the degree value to the relative position of the trackbar and displays it to the text of the label.
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             degreeDDU = trackBar1.Value;
+            label4.Text = degreeDDU.ToString();
         }
 
+        //sets the Hightside value to the relative position of the trackbar and displays it to the text of the label.
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             hsnDDU = trackBar2.Value;
+            label5.Text = hsnDDU.ToString();
         }
 
+        //sets the inclination value to the relative position of the trackbar and displays it to the text of the label.
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
             inclinationDDU = trackBar3.Value;
+            label6.Text = inclinationDDU.ToString();
         }
     }
 }
