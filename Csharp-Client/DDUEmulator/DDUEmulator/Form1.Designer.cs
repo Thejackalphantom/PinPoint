@@ -165,8 +165,8 @@
             // trackBar2
             // 
             this.trackBar2.Location = new System.Drawing.Point(266, 241);
-            this.trackBar2.Maximum = 90;
-            this.trackBar2.Minimum = -90;
+            this.trackBar2.Maximum = 180;
+            this.trackBar2.Minimum = -180;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(234, 45);
             this.trackBar2.TabIndex = 30;
@@ -275,9 +275,9 @@
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(297, 314);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 18);
+            this.label8.Size = new System.Drawing.Size(74, 18);
             this.label8.TabIndex = 42;
-            this.label8.Text = "HighSide";
+            this.label8.Text = "Hightside";
             // 
             // label9
             // 
