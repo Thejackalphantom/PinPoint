@@ -60,4 +60,42 @@
         app:layout_constraintTop_toBottomOf="@+id/btSend"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/yesData"
+        android:layout_width="225dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="208dp"
+        android:layout_marginRight="208dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/rxText"
+        app:layout_constraintEnd_toStartOf="@+id/btSend"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txText"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:color/holo_green_dark"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="120dp" />
+
+    <ImageView
+        android:id="@+id/noData"
+        android:layout_width="225dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="208dp"
+        android:layout_marginRight="208dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/rxText"
+        app:layout_constraintEnd_toStartOf="@+id/btSend"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txText"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:color/holo_red_dark" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
