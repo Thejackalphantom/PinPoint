@@ -59,11 +59,13 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     @Override
     public void onDataReceived (byte[] data) {
+        //TODO: Fix java.io.IOException: Already Closed
         if (data != null) {
             //Set the recieving data icon to visible
             yesData.setVisibility(View.VISIBLE);
             //Set no data recieved icon to invisible
             noData.setVisibility(View.INVISIBLE);
+            //Current issue: Below code causes severe errors and instability
             //Empty the string array to prepare it to recieve new data
             Arrays.fill(dataArray, null);
             //Split data string to fill in the array
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             String reconString;
             reconString = dataArray[0] + dataArray[1] + dataArray[2] + dataArray[3];
             //Display string in app.
-            rxText.setText(rxText.getText() + reconString + System.getProperty("line.separator"));
+            rxText.setText(reconString + System.getProperty("line.separator"));
         } else {
             //Set no data recieved icon to visible
             noData.setVisibility(View.VISIBLE);
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     @Override
     public void onDeviceDisconnected() {
         Toast.makeText(this, "Device disconnected", Toast.LENGTH_LONG).show();
-        finish();
     }
 
     @Override
