@@ -16,6 +16,8 @@ import com.example.ftdiapplication.USBSerialConnector;
 import com.example.ftdiapplication.USBSerialListener;
 import com.example.ftdiapplication.Utilities;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity implements USBSerialListener {
 
     USBSerialConnector mcConnector;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     ImageView yesData;
     ImageView noData;
     Button btSend;
+    String[] dataArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,11 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         yesData.setEnabled(false);
         noData.setEnabled(false);
         btSend.setEnabled(false);
-
+        /*Data array that will contain the data recieved through the serial antennae.
+          The array will always have the following index: 0 is tab,
+          1 is inclination, 2 is azimuth degrees, 3 is heightside.
+        */
+        dataArray = new String[4];
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,11 +60,23 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     @Override
     public void onDataReceived (byte[] data) {
         if (data != null) {
-            rxText.setText(rxText.getText() + Utilities.bytesToString(data) + "\n");
+            //Set the recieving data icon to visible
             yesData.setVisibility(View.VISIBLE);
+            //Set no data recieved icon to invisible
             noData.setVisibility(View.INVISIBLE);
+            //Empty the string array to prepare it to recieve new data
+            Arrays.fill(dataArray, null);
+            //Split data string to fill in the array
+            dataArray = Utilities.bytesToString(data).split(",");
+            //For now, recreate string in array
+            String reconString;
+            reconString = dataArray[0] + dataArray[1] + dataArray[2] + dataArray[3];
+            //Display string in app.
+            rxText.setText(rxText.getText() + reconString + System.getProperty("line.separator"));
         } else {
+            //Set no data recieved icon to visible
             noData.setVisibility(View.VISIBLE);
+            //Set the recieving data icon to invisible
             yesData.setVisibility(View.INVISIBLE);
         }
     }
