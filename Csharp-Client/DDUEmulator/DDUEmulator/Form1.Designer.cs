@@ -148,6 +148,7 @@
             // 
             this.rtfTerminal.Location = new System.Drawing.Point(6, 19);
             this.rtfTerminal.Name = "rtfTerminal";
+            this.rtfTerminal.ReadOnly = true;
             this.rtfTerminal.Size = new System.Drawing.Size(494, 153);
             this.rtfTerminal.TabIndex = 9;
             this.rtfTerminal.Text = "";
