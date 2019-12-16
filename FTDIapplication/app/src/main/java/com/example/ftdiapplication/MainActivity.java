@@ -16,7 +16,7 @@ import com.example.ftdiapplication.USBSerialConnector;
 import com.example.ftdiapplication.USBSerialListener;
 import com.example.ftdiapplication.Utilities;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements USBSerialListener {
 
@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     EditText rxText;
     ImageView yesData;
     ImageView noData;
+    ArrayList dataArray;
     /*Data array that will contain the data recieved through the serial antennae.
       The array will always have the following index: 0 is tab,
       1 is inclination, 2 is azimuth degrees, 3 is heightside.
     */
-    String[] dataArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         rxText.setEnabled(false);
         yesData.setEnabled(false);
         noData.setEnabled(false);
-        dataArray = new String[4];
+        dataArray = new ArrayList<>();
     }
 
     @Override
@@ -55,14 +55,9 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             //Set no data recieved icon to invisible
             noData.setVisibility(View.INVISIBLE);
             //Current issue: Below code causes severe errors and instability
-            //Empty the string array to prepare it to recieve new data
-            Arrays.fill(dataArray, null);
-            //Split data string to fill in the array
             String dataString = Utilities.bytesToString(data);
-            //writeDataToApp(dataString);
-            rxText.setText("");
-            rxText.setText(dataString);
-
+            writeDataToApp(dataString);
+//            rxText.setText(dataString);
         } else {
             //Set no data recieved icon to visible
             noData.setVisibility(View.VISIBLE);
@@ -73,29 +68,41 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     public void writeDataToApp (String dataString)
     {
-        //Create an array of the data through a split.
-        dataArray = dataString.split(",");
+        //todo: Either fix or replace split to stop the crashes
+        String stringToAdd = "";
+
+        dataArray.clear();
+        //This is basically a really ugly split.
+        char[] dataCharArr = dataString.toCharArray();
+        for(char c : dataCharArr)
+        {
+            if(c != ",".toCharArray()[0])
+            {
+                stringToAdd += c;
+            }
+            else
+            {
+                dataArray.add(stringToAdd);
+                stringToAdd = "";
+            }
+        }
 
         //Seperate the array into strings
-        String tab = dataArray[0];
-        String inc = dataArray[1];
-        String azi = dataArray[2];
-        String his = dataArray[3];
+        String tab = dataArray.get(0).toString();
+        String inc = dataArray.get(1).toString();
+        String azi = dataArray.get(2).toString();
+        String his = dataArray.get(3).toString();
 
         //Write array into app
-        rxText.setText("");
         rxText.setText(tab+" "+inc+" "+azi+""+his);
     }
 
     @Override
     public void onDeviceReady(ResponseStatus responseStatus) {
-        try {
-            txText.setEnabled(true);
-            rxText.setEnabled(true);
-            yesData.setEnabled(true);
-            noData.setEnabled(true);
-        }
-        catch(Exception e){}
+        txText.setEnabled(true);
+        rxText.setEnabled(true);
+        yesData.setEnabled(true);
+        noData.setEnabled(true);
     }
 
     @Override
