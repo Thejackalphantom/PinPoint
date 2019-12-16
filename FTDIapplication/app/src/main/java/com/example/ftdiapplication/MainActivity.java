@@ -15,6 +15,9 @@ import com.example.ftdiapplication.ResponseStatus;
 import com.example.ftdiapplication.USBSerialConnector;
 import com.example.ftdiapplication.USBSerialListener;
 import com.example.ftdiapplication.Utilities;
+
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity implements USBSerialListener {
 
     USBSerialConnector mcConnector;
@@ -27,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
       1 is inclination, 2 is azimuth degrees, 3 is heightside.
     */
     String[] dataArray;
-    byte[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +48,20 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     }
 
     @Override
-    public void onDataReceived (byte[] incomingData) {
-        if (incomingData != null) {
+    public void onDataReceived (byte[] data) {
+        if (data != null) {
             //Set the recieving data icon to visible
             yesData.setVisibility(View.VISIBLE);
             //Set no data recieved icon to invisible
             noData.setVisibility(View.INVISIBLE);
-            //Set incomingData to data so it can be used out of the scope
-            data = incomingData;
+            //Current issue: Below code causes severe errors and instability
+            //Empty the string array to prepare it to recieve new data
+            Arrays.fill(dataArray, null);
+            //Split data string to fill in the array
+            String dataString = Utilities.bytesToString(data);
+            //writeDataToApp(dataString);
+            rxText.setText("");
+            rxText.setText(dataString);
 
         } else {
             //Set no data recieved icon to visible
@@ -75,20 +83,19 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         String his = dataArray[3];
 
         //Write array into app
+        rxText.setText("");
         rxText.setText(tab+" "+inc+" "+azi+""+his);
     }
 
     @Override
-    public void onErrorReceived(String data) {
-        Toast.makeText(this, data, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void onDeviceReady(ResponseStatus responseStatus) {
-        txText.setEnabled(true);
-        rxText.setEnabled(true);
-        yesData.setEnabled(true);
-        noData.setEnabled(true);
+        try {
+            txText.setEnabled(true);
+            rxText.setEnabled(true);
+            yesData.setEnabled(true);
+            noData.setEnabled(true);
+        }
+        catch(Exception e){}
     }
 
     @Override
@@ -105,10 +112,8 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     @Override
     protected void onPause() {
-        try {
-            super.onPause();
-            mcConnector.pausedActivity();
-        }
-        catch(Exception e){}
+        super.onPause();
+        mcConnector.pausedActivity();
+
     }
 }
