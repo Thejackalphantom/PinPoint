@@ -121,7 +121,6 @@ public class USBSerialConnector implements SerialInputOutputManager.Listener {
             try {
                 serialPort.close();
             } catch (IOException e) {
-                usbSerialListener.onErrorReceived(Utilities.getStackTrace(e));
             }
             serialPort = null;
         }
@@ -177,7 +176,6 @@ public class USBSerialConnector implements SerialInputOutputManager.Listener {
             serialIOManager.writeAsync(data);
             handlerTimeOut.postDelayed(timeOutRunnable, timeoutMillis);
         } else {
-            usbSerialListener.onErrorReceived("Null SerialIOManager");
         }
     }
 
@@ -185,7 +183,6 @@ public class USBSerialConnector implements SerialInputOutputManager.Listener {
         if (serialIOManager != null) {
             serialIOManager.writeAsync(data);
         } else {
-            usbSerialListener.onErrorReceived("Null SerialIOManager");
         }
     }
 
@@ -203,7 +200,6 @@ public class USBSerialConnector implements SerialInputOutputManager.Listener {
     @Override
     public void onRunError(Exception e) {
         //removeTimeOutCallbacks();
-        usbSerialListener.onErrorReceived("onRunError: " + Utilities.getStackTrace(e));
     }
 
     private class SetUsbSerialDriver extends AsyncTask<Integer, Void, Boolean> {

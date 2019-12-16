@@ -25,7 +25,10 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     EditText rxText;
     ImageView yesData;
     ImageView noData;
-    Button btSend;
+    /*Data array that will contain the data recieved through the serial antennae.
+      The array will always have the following index: 0 is tab,
+      1 is inclination, 2 is azimuth degrees, 3 is heightside.
+    */
     String[] dataArray;
 
     @Override
@@ -37,29 +40,15 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         rxText = (EditText) findViewById(R.id.rxText);
         yesData = (ImageView) findViewById(R.id.yesData);
         noData = (ImageView) findViewById(R.id.noData);
-        btSend = (Button) findViewById(R.id.btSend);
         txText.setEnabled(false);
         rxText.setEnabled(false);
         yesData.setEnabled(false);
         noData.setEnabled(false);
-        btSend.setEnabled(false);
-        /*Data array that will contain the data recieved through the serial antennae.
-          The array will always have the following index: 0 is tab,
-          1 is inclination, 2 is azimuth degrees, 3 is heightside.
-        */
         dataArray = new String[4];
-        btSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data = txText.getText().toString();
-                mcConnector.writeAsync(data.getBytes());
-            }
-        });
     }
 
     @Override
     public void onDataReceived (byte[] data) {
-        //TODO: Fix java.io.IOException: Already Closed
         if (data != null) {
             //Set the recieving data icon to visible
             yesData.setVisibility(View.VISIBLE);
@@ -69,12 +58,11 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             //Empty the string array to prepare it to recieve new data
             Arrays.fill(dataArray, null);
             //Split data string to fill in the array
-            dataArray = Utilities.bytesToString(data).split(",");
-            //For now, recreate string in array
-            String reconString;
-            reconString = dataArray[0] + dataArray[1] + dataArray[2] + dataArray[3];
-            //Display string in app.
-            rxText.setText(reconString + System.getProperty("line.separator"));
+            String dataString = Utilities.bytesToString(data);
+            //writeDataToApp(dataString);
+            rxText.setText("");
+            rxText.setText(dataString);
+
         } else {
             //Set no data recieved icon to visible
             noData.setVisibility(View.VISIBLE);
@@ -83,18 +71,31 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         }
     }
 
-    @Override
-    public void onErrorReceived(String data) {
-        Toast.makeText(this, data, Toast.LENGTH_LONG).show();
+    public void writeDataToApp (String dataString)
+    {
+        //Create an array of the data through a split.
+        dataArray = dataString.split(",");
+
+        //Seperate the array into strings
+        String tab = dataArray[0];
+        String inc = dataArray[1];
+        String azi = dataArray[2];
+        String his = dataArray[3];
+
+        //Write array into app
+        rxText.setText("");
+        rxText.setText(tab+" "+inc+" "+azi+""+his);
     }
 
     @Override
     public void onDeviceReady(ResponseStatus responseStatus) {
-        txText.setEnabled(true);
-        rxText.setEnabled(true);
-        yesData.setEnabled(true);
-        noData.setEnabled(true);
-        btSend.setEnabled(true);
+        try {
+            txText.setEnabled(true);
+            rxText.setEnabled(true);
+            yesData.setEnabled(true);
+            noData.setEnabled(true);
+        }
+        catch(Exception e){}
     }
 
     @Override
@@ -113,5 +114,6 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     protected void onPause() {
         super.onPause();
         mcConnector.pausedActivity();
+
     }
 }
