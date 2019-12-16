@@ -15,9 +15,6 @@ import com.example.ftdiapplication.ResponseStatus;
 import com.example.ftdiapplication.USBSerialConnector;
 import com.example.ftdiapplication.USBSerialListener;
 import com.example.ftdiapplication.Utilities;
-
-import java.util.Arrays;
-import java.util.regex.Pattern;
 public class MainActivity extends AppCompatActivity implements USBSerialListener {
 
     USBSerialConnector mcConnector;
@@ -25,7 +22,12 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     EditText rxText;
     ImageView yesData;
     ImageView noData;
+    /*Data array that will contain the data recieved through the serial antennae.
+      The array will always have the following index: 0 is tab,
+      1 is inclination, 2 is azimuth degrees, 3 is heightside.
+    */
     String[] dataArray;
+    byte[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +42,18 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         rxText.setEnabled(false);
         yesData.setEnabled(false);
         noData.setEnabled(false);
-        /*Data array that will contain the data recieved through the serial antennae.
-          The array will always have the following index: 0 is tab,
-          1 is inclination, 2 is azimuth degrees, 3 is heightside.
-        */
         dataArray = new String[4];
     }
 
     @Override
-    public void onDataReceived (byte[] data) {
-        //TODO: Fix java.io.IOException: Already Closed &
-        if (data != null) {
+    public void onDataReceived (byte[] incomingData) {
+        if (incomingData != null) {
             //Set the recieving data icon to visible
             yesData.setVisibility(View.VISIBLE);
             //Set no data recieved icon to invisible
             noData.setVisibility(View.INVISIBLE);
-            //Current issue: Below code causes severe errors and instability
-            //Split data string to fill in the array
-            String dataString = Utilities.bytesToString(data);
-            writeDataToApp(dataString);
+            //Set incomingData to data so it can be used out of the scope
+            data = incomingData;
 
         } else {
             //Set no data recieved icon to visible
@@ -68,11 +63,10 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         }
     }
 
-    public void writeDataToApp (String data)
+    public void writeDataToApp (String dataString)
     {
         //Create an array of the data through a split.
-        //Pattern.quote is utility
-        dataArray = data.split(Pattern.quote(","));
+        dataArray = dataString.split(",");
 
         //Seperate the array into strings
         String tab = dataArray[0];
@@ -81,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         String his = dataArray[3];
 
         //Write array into app
-        rxText.setText(inc);
+        rxText.setText(tab+" "+inc+" "+azi+""+his);
     }
 
     @Override
@@ -111,7 +105,10 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     @Override
     protected void onPause() {
-        super.onPause();
-        mcConnector.pausedActivity();
+        try {
+            super.onPause();
+            mcConnector.pausedActivity();
+        }
+        catch(Exception e){}
     }
 }
