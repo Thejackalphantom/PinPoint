@@ -5,13 +5,10 @@ import android.os.Bundle;
 
 //android libraries
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-//the usb-serial Libraries
 
 public class MainActivity extends AppCompatActivity implements USBSerialListener {
 
@@ -53,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
                     noData.setVisibility(View.INVISIBLE);
                     //Current issue: Below code causes severe errors and instability
                     writeDataToApp(data);
+                    //empty the data so that the display will turn red when no data is recieved
+                    data = null;
                 } else {
                     //Set no data recieved icon to visible
                     noData.setVisibility(View.VISIBLE);
@@ -67,23 +66,26 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     @Override
     public void onDataReceived (byte[] incomingData) {
+        //This writes the incoming data to the variable within the class itself
         data = incomingData;
     }
 
     public void writeDataToApp (byte[] recievedData)
     {
-        //todo: Either fix or replace split to stop the crashes
+        //todo: Data recieved is not always complete
         //Convert byte array to string
         String dataString = Utilities.bytesToString(recievedData);
-
+        //Split the string into an array so the seperate data can be called easily
+        String[] dataArr = dataString.split(",");
         //These are the different string to be shown
-        String tab = "";
-        String inc = "";
-        String azi = "";
-        String his = "";
+        //Index is often out of bounds due to the entire string not being here all the time.
+        String tab = dataArr[0];
+        String inc = dataString;
+        String azi = dataArr[0];
+        String his = dataArr[0];
 
         //setText writes the text to the app
-        aziText.setText(dataString);
+        aziText.setText(azi);
         incText.setText(inc);
         hisText.setText(his);
     }
