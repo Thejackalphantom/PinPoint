@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 //android libraries
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     EditText hisText;
     ImageView yesData;
     ImageView noData;
+    Handler Handler;
+    Runnable DataRunner;
     byte[] data;
 
     @Override
@@ -36,24 +40,33 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         hisText.setEnabled(false);
         yesData.setEnabled(false);
         noData.setEnabled(false);
+        //Set a handler and runnable up to execute the data processing code every second
+        Handler = new Handler();
+        DataRunner = new Runnable()
+        {
+            public void run()
+            {
+                if (data != null) {
+                    //Set the recieving data icon to visible
+                    yesData.setVisibility(View.VISIBLE);
+                    //Set no data recieved icon to invisible
+                    noData.setVisibility(View.INVISIBLE);
+                    //Current issue: Below code causes severe errors and instability
+                    writeDataToApp(data);
+                } else {
+                    //Set no data recieved icon to visible
+                    noData.setVisibility(View.VISIBLE);
+                    //Set the recieving data icon to invisible
+                    yesData.setVisibility(View.INVISIBLE);
+                }
+            }
+        };
+        Handler.postDelayed(DataRunner, 1000);
     }
 
     @Override
     public void onDataReceived (byte[] incomingData) {
         data = incomingData;
-        if (incomingData != null) {
-            //Set the recieving data icon to visible
-            yesData.setVisibility(View.VISIBLE);
-            //Set no data recieved icon to invisible
-            noData.setVisibility(View.INVISIBLE);
-            //Current issue: Below code causes severe errors and instability
-            writeDataToApp(data);
-        } else {
-            //Set no data recieved icon to visible
-            noData.setVisibility(View.VISIBLE);
-            //Set the recieving data icon to invisible
-            yesData.setVisibility(View.INVISIBLE);
-        }
     }
 
     public void writeDataToApp (byte[] recievedData)
