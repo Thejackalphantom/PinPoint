@@ -59,9 +59,10 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
                     //Set the recieving data icon to invisible
                     yesData.setVisibility(View.INVISIBLE);
                 }
+                Handler.postDelayed(DataRunner, 1000);
             }
         };
-        Handler.postDelayed(DataRunner, 1000);
+        Handler.post(DataRunner);
     }
 
     @Override
