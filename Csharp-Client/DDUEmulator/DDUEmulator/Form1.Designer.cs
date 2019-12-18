@@ -66,7 +66,7 @@
             // 
             // timerSentData
             // 
-            this.timerSentData.Interval = 200;
+            this.timerSentData.Interval = 2000;
             this.timerSentData.Tick += new System.EventHandler(this.TimerSentData_Tick);
             // 
             // toolStrip2
