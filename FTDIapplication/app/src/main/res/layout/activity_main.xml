@@ -109,5 +109,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="79dp"
+        android:layout_height="86dp"
+        app:srcCompat="@drawable/jabba"
+        tools:layout_editor_absoluteX="-9dp"
+        tools:layout_editor_absoluteY="639dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
