@@ -56,18 +56,18 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         {
             public void run()
             {
-                if (data != null) {
-                    //Set the recieving data icon to visible
-                    yesData.setVisibility(View.VISIBLE);
-                    //Set no data recieved icon to invisible
-                    noData.setVisibility(View.INVISIBLE);
-                } else {
-                    //Set no data recieved icon to visible
-                    noData.setVisibility(View.VISIBLE);
-                    //Set the recieving data icon to invisible
-                    yesData.setVisibility(View.INVISIBLE);
-                }
-                Handler.postDelayed(ConnectionChecker, 200);
+            if (data != null) {
+                //Set the recieving data icon to visible
+                yesData.setVisibility(View.VISIBLE);
+                //Set no data recieved icon to invisible
+                noData.setVisibility(View.INVISIBLE);
+            } else {
+                //Set no data recieved icon to visible
+                noData.setVisibility(View.VISIBLE);
+                //Set the recieving data icon to invisible
+                yesData.setVisibility(View.INVISIBLE);
+            }
+            Handler.postDelayed(ConnectionChecker, 200);
             }
         };
         Handler.post(ConnectionChecker);
@@ -269,6 +269,5 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         //This is executed when the program is paused
         super.onPause();
         mcConnector.pausedActivity();
-
     }
 }
