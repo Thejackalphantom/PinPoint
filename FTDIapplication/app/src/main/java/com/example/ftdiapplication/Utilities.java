@@ -24,6 +24,6 @@ public class Utilities {
         StringWriter errors = new StringWriter();
         PrintWriter writer = new PrintWriter(errors);
         e.printStackTrace(writer);
-        return errors.toString().replaceAll("\t", "").replaceAll("\n", " | ").replaceAll("\r", "").trim();
+        return errors.toString().trim();
     }
 }

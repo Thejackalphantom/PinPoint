@@ -28,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     Handler Handler;
     //Class that will run all the data processing code
     Runnable ConnectionChecker;
-    //Byte-array that contains the recieved data from the FTDI chip
-    byte[] data;
+    //String that contains the recieved data from the FTDI chip
+    String data;
+    //Boolean to check connection
+    Boolean connected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +52,32 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         hisText.setEnabled(false);
         yesData.setEnabled(false);
         noData.setEnabled(false);
+        //Create empty string for data
+        data = "";
+        //Set connected to false by default
+        connected = false;
         //Set a handler and runnable up to execute the connection checking code
         Handler = new Handler();
         ConnectionChecker = new Runnable()
         {
             public void run()
             {
-            if (data != null) {
+            if (connected == true) {
                 //Set the recieving data icon to visible
                 yesData.setVisibility(View.VISIBLE);
                 //Set no data recieved icon to invisible
                 noData.setVisibility(View.INVISIBLE);
+                //Check given data
+                dataCheck(data);
+                //Clear the string once finished writing to the app
             } else {
                 //Set no data recieved icon to visible
                 noData.setVisibility(View.VISIBLE);
                 //Set the recieving data icon to invisible
                 yesData.setVisibility(View.INVISIBLE);
             }
-            //Set data to null for connection check
-            data = null;
+            //Reset connected for proper connection check
+            connected = false;
             Handler.postDelayed(ConnectionChecker, 200);
             }
         };
@@ -77,23 +86,34 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     @Override
     public void onDataReceived (byte[] incomingData) {
+        //set Connected to true
+        connected = true;
         //Write incomingData to data so that it can be used in other methods
-        data = incomingData;
-        //Convert byte array to string
-        String dataString = Utilities.bytesToString(incomingData);
-        //Check if the string starts with tab02 and ends with /r/n as this was the part of the agreed upon syntax that never changes.
-        if(dataString.startsWith("$tab02"))
-        {
-            writeDataToApp(dataString);
+        data += Utilities.bytesToString(incomingData);
+    }
+
+    public void dataCheck(String recievedData)
+    {
+        //Check incoming data and add to it untill the data recieved is a complete string.
+        //Check if the string's length is or exceeds 21 characters, the length of the expected string
+        if(recievedData.length() == 17 || recievedData.length() > 17) {
+            //Check if the string starts and ends with with the proper protocol
+            if (recievedData.substring(0, 17).startsWith("$tab") || recievedData.substring(0, 17).endsWith("/r/n")){
+                //Now, write the data to the app
+                writeDataToApp(recievedData.substring(0, 17));
+                //TODO: Fix the string not being cleared
+                //Clear the string
+                data = "";
+            }
         }
     }
 
-    public void writeDataToApp (String recievedData)
+    public void writeDataToApp (String checkedData)
     {
         //todo: Data recieved is not always complete
 
         //Split the string into an array so the seperate data can be called easily
-        String[] dataArr = recievedData.split(",");
+        String[] dataArr = checkedData.split(",");
         //These are the different string to be shown
         //Index is often out of bounds due to the entire string not being here all the time.
         String tab = dataArr[0];
