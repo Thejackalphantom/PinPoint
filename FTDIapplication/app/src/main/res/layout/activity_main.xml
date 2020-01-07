@@ -10,96 +10,61 @@
         android:id="@+id/yesData"
         android:layout_width="204dp"
         android:layout_height="80dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="353dp"
-        android:layout_marginRight="353dp"
-        android:layout_marginBottom="552dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noData"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/recievingdata" />
 
     <ImageView
         android:id="@+id/noData"
         android:layout_width="201dp"
         android:layout_height="81dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="352dp"
-        android:layout_marginRight="352dp"
-        android:layout_marginBottom="552dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hisiImage"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="@+id/yesData"
+        app:layout_constraintEnd_toEndOf="@+id/yesData"
+        app:layout_constraintStart_toStartOf="@+id/yesData"
+        app:layout_constraintTop_toTopOf="@+id/yesData"
         app:srcCompat="@drawable/nodata" />
-
-    <ImageView
-        android:id="@+id/incImage"
-        android:layout_width="204dp"
-        android:layout_height="88dp"
-        android:adjustViewBounds="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/incdata" />
-
-    <ImageView
-        android:id="@+id/aziImage"
-        android:layout_width="206dp"
-        android:layout_height="89dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/azidata" />
-
-    <ImageView
-        android:id="@+id/hisiImage"
-        android:layout_width="208dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aziImage"
-        app:srcCompat="@drawable/hisidata" />
 
     <EditText
         android:id="@+id/inclination"
-        android:layout_width="183dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="129dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="124dp"
+        android:clickable="false"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/azimuthDegrees"
-        android:layout_width="199dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="131dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginRight="148dp"
+        android:clickable="false"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/aziImage"
-        app:layout_constraintTop_toTopOf="@+id/aziImage" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/heightside"
-        android:layout_width="196dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="120dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="false"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aziImage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

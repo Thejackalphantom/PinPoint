@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
                 //Set the recieving data icon to invisible
                 yesData.setVisibility(View.INVISIBLE);
             }
+            //Set data to null for connection check
+            data = null;
             Handler.postDelayed(ConnectionChecker, 200);
             }
         };
@@ -75,151 +77,15 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     @Override
     public void onDataReceived (byte[] incomingData) {
-        //Boolean to check whether or not the incoming data is complete
-        boolean isComplete = false;
         //Write incomingData to data so that it can be used in other methods
         data = incomingData;
         //Convert byte array to string
         String dataString = Utilities.bytesToString(incomingData);
-        //Convert it to a char array for checking of every symbol
-        char[] dataCharArr = dataString.toCharArray();
-        //Following code goes through every symbol in the dataCharArr to check whether or not it holds up to the agreed upon $tab2,XXX,XXX,XXX/r/n
-        if(dataString.length() == 22) {
-            for (int index = 0; index < 22; index++) {
-                switch(index)
-                {
-                    case 0:
-                        if(Character.toString(dataCharArr[index]) != "$")
-                        {
-                            isComplete = false;
-                        }
-                        break;
-                    case 1:
-                        if(Character.toString(dataCharArr[index]) != "t")
-                        {
-                            isComplete = false;
-                        }
-                    case 2:
-                        if(Character.toString(dataCharArr[index]) != "a")
-                        {
-                            isComplete = false;
-                        }
-                    case 3:
-                        if(Character.toString(dataCharArr[index]) != "b")
-                        {
-                            isComplete = false;
-                        }
-                    case 5:
-                        if(Character.toString(dataCharArr[index]) != "0")
-                        {
-                            isComplete = false;
-                        }
-                    case 6:
-                        if(Character.toString(dataCharArr[index]) != "2")
-                        {
-                            isComplete = false;
-                        }
-                    case 7:
-                        if(Character.toString(dataCharArr[index]) != ",")
-                        {
-                            isComplete = false;
-                        }
-                    case 8:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 9:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 10:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 11:
-                        if(Character.toString(dataCharArr[index]) != ",")
-                        {
-                            isComplete = false;
-                        }
-                    case 12:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 13:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 14:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 15:
-                        if(Character.toString(dataCharArr[index]) != ",")
-                        {
-                            isComplete = false;
-                        }
-                    case 16:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 17:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 18:
-                        if(Character.isDigit(dataCharArr[index]) == false)
-                        {
-                            isComplete = false;
-                        }
-                    case 19:
-                        if(Character.toString(dataCharArr[index]) != "/")
-                        {
-                            isComplete = false;
-                        }
-                        break;
-                    case 20:
-                        if(Character.toString(dataCharArr[index]) != "r")
-                        {
-                            isComplete = false;
-                        }
-                        break;
-                    case 21:
-                        if(Character.toString(dataCharArr[index]) != "/")
-                        {
-                            isComplete = false;
-                        }
-                        break;
-                    case 22:
-                        if(Character.toString(dataCharArr[index]) != "n")
-                        {
-                            isComplete = false;
-                        }
-                        break;
-                    default:
-                        isComplete = true;
-                        break;
-                }
-            }
-        }
-        else
+        //Check if the string starts with tab02 and ends with /r/n as this was the part of the agreed upon syntax that never changes.
+        if(dataString.startsWith("tab02"))
         {
-            isComplete = false;
-        }
-        if(isComplete == true) {
-            //Current issue: Below code causes severe errors and instability
             writeDataToApp(dataString);
         }
-        else{}
-        //empty the data so that the display will turn red when no data is recieved next time
-        data = null;
     }
 
     public void writeDataToApp (String recievedData)
@@ -231,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         //These are the different string to be shown
         //Index is often out of bounds due to the entire string not being here all the time.
         String tab = dataArr[0];
-        String inc = recievedData;
-        String azi = dataArr[0];
-        String his = dataArr[0];
+        String inc = dataArr[1];
+        String azi = dataArr[2];
+        String his = dataArr[3];
 
         //setText writes the text to the app
         aziText.setText(azi);
