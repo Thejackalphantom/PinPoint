@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         //Convert byte array to string
         String dataString = Utilities.bytesToString(incomingData);
         //Check if the string starts with tab02 and ends with /r/n as this was the part of the agreed upon syntax that never changes.
-        if(dataString.startsWith("tab02"))
+        if(dataString.startsWith("$tab02"))
         {
             writeDataToApp(dataString);
         }
