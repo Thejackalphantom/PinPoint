@@ -70,16 +70,20 @@ namespace DDUEmulator
             }));
         }
 
+        int counter = 0;
+
         private void TimerSentData_Tick(object sender, EventArgs e)
         {
             if (serialPortDDU.IsOpen)
             {
                 Console.WriteLine("Running");
-
+                //counter++;
                 //Sets the string that will be outputed via the serial controller with the inputed values
-                String dataOut = "$tab02,  " + inclinationDDU.ToString() + "," + degreeDDU.ToString() + "," + hsnDDU.ToString() + "\r\n";
+                String dataOut = "$tab02," + inclinationDDU.ToString() + "," + degreeDDU.ToString() + "," + hsnDDU.ToString() + "\r\n";
 
                 serialPortDDU.Write(dataOut);
+                //Console.WriteLine(counter.ToString, "");
+                //Console.WriteLine(dataOut);
                 Log(LogMsgType.Incoming, dataOut);
             }
 
