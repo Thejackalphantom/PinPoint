@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         //Check if the string's length is or exceeds 21 characters, the length of the expected string
         if(recievedData.length() > 17) {
             //Check if the string starts and ends with with the proper protocol
-            if (recievedData.substring(0, 22).startsWith("$tab"){
+            if (recievedData.substring(0, 22).startsWith("$tab")){
                 //Now, write the data to the app
                 writeDataToApp(recievedData.substring(0, 22));
                 //TODO: Fix the string not being cleared
