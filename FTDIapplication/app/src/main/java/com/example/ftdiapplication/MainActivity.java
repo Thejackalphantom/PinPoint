@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
                     //Check given dataBuffer
                     dataCheck(dataBuffer);
                     //Clear the buffer
-                    dataBuffer.delete(0,27);
+                    dataBuffer.delete(0,dataBuffer.length());
                 }
                 //Repeat previous runnable code with a 150ms delay
                 Handler.postDelayed(DataHandler, 150);
@@ -114,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     {
         String dataString = recievedData.toString();
         //Check incoming dataBuffer and add to it untill the dataBuffer recieved is a complete string.
-        //Check if the string's length is or exceeds 21 characters, the length of the expected string
-        if(recievedData.length() > 17) {
+        //Check if the string's length is 26 characters, the length of the expected string
+        if(recievedData.length() == 27) {
             //Check if the string starts and ends with with the proper protocol
             if (dataString.startsWith("$tab")){
                 //Now, write the dataBuffer to the app
