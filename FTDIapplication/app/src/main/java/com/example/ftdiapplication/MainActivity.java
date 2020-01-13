@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
 
     //Class for the USBSerial Connector API
     USBSerialConnector mcConnector;
+
     //Class for the field in the app where the inclination will be shown
     EditText incText;
     //Class for the field in the app where the azimuth degree will be shown
@@ -26,9 +27,8 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     ImageView noData;
     //Class for the imageview in the app for the degree circle pointer
     ImageView pointer;
-    //Class for the imageview in the app for the degree circle compass
-    ImageView compass;
     //Class for the handler to handle the dataBuffer processing code every second
+
     Handler Handler;
     //Class that will check the connection status, ran at 300ms
     Runnable ConnectionChecker;
@@ -46,29 +46,24 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         setContentView(R.layout.activity_main);
         //Intialize the USBSerialConnector api
         mcConnector = USBSerialConnector.getInstance();
+
         //Get the ID of all the fields that require any manipulaton by code.
         incText = (EditText) findViewById(R.id.inclination);
         aziText = (EditText) findViewById(R.id.azimuthDegrees);
         hisText = (EditText) findViewById(R.id.heightside);
         yesData = (ImageView) findViewById(R.id.yesData);
         noData = (ImageView) findViewById(R.id.noData);
-        compass = (ImageView) findViewById(R.id.compass);
         pointer = (ImageView) findViewById(R.id.pointer);
-        //Pre-emptively disable the fields for better showing, enabled with onDeviceReady()
-        incText.setEnabled(false);
-        aziText.setEnabled(false);
-        hisText.setEnabled(false);
-        yesData.setEnabled(false);
-        noData.setEnabled(false);
+
         //Create empty string for dataBuffer to be used as buffer
         dataBuffer = new StringBuffer(27);
         //Set connected to false by default
         connected = false;
         //Set a handler and runnable up to execute the connection checking code
         Handler = new Handler();
+        //This Runnable handles the connection check of the app.
         ConnectionChecker = new Runnable()
         {
-            //This Runnable handles the connection check of the app.
             public void run()
             {
             if (connected == true) {
@@ -84,13 +79,14 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             }
             //Reset connected for proper connection check
             connected = false;
+            //Repeat previous runnable code with a 300ms delay
             Handler.postDelayed(ConnectionChecker, 300);
             }
         };
         Handler.post(ConnectionChecker);
+        //This Runnable handles the data processing of the incomming serial data
         DataHandler = new Runnable()
         {
-            //This Runnable handles the data processing of the incomming serial data
             public void run()
             {
                 if (connected == true) {
@@ -99,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
                     //Clear the buffer
                     dataBuffer.delete(0,27);
                 }
+                //Repeat previous runnable code with a 150ms delay
                 Handler.postDelayed(DataHandler, 150);
             }
         };
@@ -123,22 +120,21 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             if (dataString.startsWith("$tab")){
                 //Now, write the dataBuffer to the app
                 writeDataToApp(dataString);
-                //TODO: Fix the string not being cleared
             }
         }
     }
 
     public void writeDataToApp (String checkedData)
     {
-        //todo: Data recieved is not always complete
-
         //Split the string into an array so the seperate dataBuffer can be called easily
+        //The first index in the array is the tab, which is never shown
         String[] dataArr = checkedData.split(",");
-        //These are the different string to be shown
-        //Index is often out of bounds due to the entire string not being here all the time.
-        String tab = dataArr[0];
+        //The variables below are the different string to be shown.
+        //This is the inclination
         String inc = dataArr[1];
+        //This is the azimuth degrees
         String azi = dataArr[2];
+        //The height side is used for the degree circle
         String his = dataArr[3];
 
         //setText writes the text to the app
@@ -147,17 +143,11 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         hisText.setText(his);
 
         //setPivot sets the rotational pivot for the rotation
-
         pointer.setRotation(Float.parseFloat(azi));
     }
 
     @Override
     public void onDeviceReady(ResponseStatus responseStatus) {
-        //This code is executed whenever the device is ready to roll
-        incText.setEnabled(true);
-        aziText.setEnabled(true);
-        yesData.setEnabled(true);
-        noData.setEnabled(true);
     }
 
     @Override
