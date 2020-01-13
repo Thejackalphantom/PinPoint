@@ -20,16 +20,18 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     EditText aziText;
     //Class for the field in the app where the high side degree will be shown
     EditText hisText;
-    //Class for the field in the app where the no incoming data display will be shown
+    //Class for the field in the app where the no incoming dataBuffer display will be shown
     ImageView yesData;
-    //Class for the field in the app where the incoming data display will be shown
+    //Class for the field in the app where the incoming dataBuffer display will be shown
     ImageView noData;
-    //Class for the handler to handle the data processing code every second
+    //Class for the imageview in the app for the degree circle pointer
+    ImageView pointer;
+    //Class for the handler to handle the dataBuffer processing code every second
     Handler Handler;
-    //Class that will run all the data processing code
+    //Class that will run all the dataBuffer processing code
     Runnable ConnectionChecker;
-    //String that contains the recieved data from the FTDI chip
-    String data;
+    //String that contains the recieved dataBuffer from the FTDI chip
+    StringBuffer dataBuffer;
     //Boolean to check connection
     Boolean connected;
 
@@ -46,14 +48,15 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         hisText = (EditText) findViewById(R.id.heightside);
         yesData = (ImageView) findViewById(R.id.yesData);
         noData = (ImageView) findViewById(R.id.noData);
+        pointer = (ImageView) findViewById(R.id.pointer);
         //Pre-emptively disable the fields for better showing, enabled with onDeviceReady()
         incText.setEnabled(false);
         aziText.setEnabled(false);
         hisText.setEnabled(false);
         yesData.setEnabled(false);
         noData.setEnabled(false);
-        //Create empty string for data
-        data = "";
+        //Create empty string for dataBuffer to be used as buffer
+        dataBuffer = new StringBuffer(27);
         //Set connected to false by default
         connected = false;
         //Set a handler and runnable up to execute the connection checking code
@@ -63,17 +66,18 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             public void run()
             {
             if (connected == true) {
-                //Set the recieving data icon to visible
+                //Set the recieving dataBuffer icon to visible
                 yesData.setVisibility(View.VISIBLE);
-                //Set no data recieved icon to invisible
+                //Set no dataBuffer recieved icon to invisible
                 noData.setVisibility(View.INVISIBLE);
-                //Check given data
-                dataCheck(data);
-                //Clear the string once finished writing to the app
+                //Check given dataBuffer
+                dataCheck(dataBuffer);
+                //Clear the buffer
+                dataBuffer.delete(0,27);
             } else {
-                //Set no data recieved icon to visible
+                //Set no dataBuffer recieved icon to visible
                 noData.setVisibility(View.VISIBLE);
-                //Set the recieving data icon to invisible
+                //Set the recieving dataBuffer icon to invisible
                 yesData.setVisibility(View.INVISIBLE);
             }
             //Reset connected for proper connection check
@@ -88,22 +92,21 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     public void onDataReceived (byte[] incomingData) {
         //set Connected to true
         connected = true;
-        //Write incomingData to data so that it can be used in other methods
-        data += Utilities.bytesToString(incomingData);
+        //Write incomingData to dataBuffer so that it can be used in other methods
+        dataBuffer.append(Utilities.bytesToString(incomingData));
     }
 
-    public void dataCheck(String recievedData)
+    public void dataCheck(StringBuffer recievedData)
     {
-        //Check incoming data and add to it untill the data recieved is a complete string.
+        String dataString = recievedData.toString();
+        //Check incoming dataBuffer and add to it untill the dataBuffer recieved is a complete string.
         //Check if the string's length is or exceeds 21 characters, the length of the expected string
-        if(recievedData.length() > 17) {
+        if(recievedData.length() > 27) {
             //Check if the string starts and ends with with the proper protocol
-            if (recievedData.substring(0, 22).startsWith("$tab")){
-                //Now, write the data to the app
-                writeDataToApp(recievedData.substring(0, 22));
+            if (dataString.startsWith("$tab")){
+                //Now, write the dataBuffer to the app
+                writeDataToApp(dataString);
                 //TODO: Fix the string not being cleared
-                //Clear the string
-                data = "";
             }
         }
     }
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     {
         //todo: Data recieved is not always complete
 
-        //Split the string into an array so the seperate data can be called easily
+        //Split the string into an array so the seperate dataBuffer can be called easily
         String[] dataArr = checkedData.split(",");
         //These are the different string to be shown
         //Index is often out of bounds due to the entire string not being here all the time.
@@ -125,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         aziText.setText(azi);
         incText.setText(inc);
         hisText.setText(his);
+        
     }
 
     @Override

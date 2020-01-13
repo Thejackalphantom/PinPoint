@@ -95,7 +95,7 @@ public class USBSerialConnector implements SerialInputOutputManager.Listener {
             UsbSerialDriver driver = availableDrivers.get(0);
             List<UsbSerialPort> ports = driver.getPorts();
 
-            // Read some data! Most have just one port (port 0).
+            // Read some dataBuffer! Most have just one port (port 0).
             if (!ports.isEmpty()) {
                 serialPort = ports.get(0);
                 Log.d(TAG, "Port: " + serialPort);
