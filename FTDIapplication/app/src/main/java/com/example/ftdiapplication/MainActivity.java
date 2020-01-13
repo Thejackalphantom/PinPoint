@@ -26,10 +26,14 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
     ImageView noData;
     //Class for the imageview in the app for the degree circle pointer
     ImageView pointer;
+    //Class for the imageview in the app for the degree circle compass
+    ImageView compass;
     //Class for the handler to handle the dataBuffer processing code every second
     Handler Handler;
-    //Class that will run all the dataBuffer processing code
+    //Class that will check the connection status, ran at 300ms
     Runnable ConnectionChecker;
+    //Class that will handle the data, ran at 150ms
+    Runnable DataHandler;
     //String that contains the recieved dataBuffer from the FTDI chip
     StringBuffer dataBuffer;
     //Boolean to check connection
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         hisText = (EditText) findViewById(R.id.heightside);
         yesData = (ImageView) findViewById(R.id.yesData);
         noData = (ImageView) findViewById(R.id.noData);
+        compass = (ImageView) findViewById(R.id.compass);
         pointer = (ImageView) findViewById(R.id.pointer);
         //Pre-emptively disable the fields for better showing, enabled with onDeviceReady()
         incText.setEnabled(false);
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         Handler = new Handler();
         ConnectionChecker = new Runnable()
         {
+            //This Runnable handles the connection check of the app.
             public void run()
             {
             if (connected == true) {
@@ -70,10 +76,6 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
                 yesData.setVisibility(View.VISIBLE);
                 //Set no dataBuffer recieved icon to invisible
                 noData.setVisibility(View.INVISIBLE);
-                //Check given dataBuffer
-                dataCheck(dataBuffer);
-                //Clear the buffer
-                dataBuffer.delete(0,27);
             } else {
                 //Set no dataBuffer recieved icon to visible
                 noData.setVisibility(View.VISIBLE);
@@ -82,10 +84,25 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
             }
             //Reset connected for proper connection check
             connected = false;
-            Handler.postDelayed(ConnectionChecker, 200);
+            Handler.postDelayed(ConnectionChecker, 300);
             }
         };
         Handler.post(ConnectionChecker);
+        DataHandler = new Runnable()
+        {
+            //This Runnable handles the data processing of the incomming serial data
+            public void run()
+            {
+                if (connected == true) {
+                    //Check given dataBuffer
+                    dataCheck(dataBuffer);
+                    //Clear the buffer
+                    dataBuffer.delete(0,27);
+                }
+                Handler.postDelayed(DataHandler, 150);
+            }
+        };
+        Handler.post(DataHandler);
     }
 
     @Override
@@ -101,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         String dataString = recievedData.toString();
         //Check incoming dataBuffer and add to it untill the dataBuffer recieved is a complete string.
         //Check if the string's length is or exceeds 21 characters, the length of the expected string
-        if(recievedData.length() > 27) {
+        if(recievedData.length() > 17) {
             //Check if the string starts and ends with with the proper protocol
             if (dataString.startsWith("$tab")){
                 //Now, write the dataBuffer to the app
@@ -128,7 +145,10 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         aziText.setText(azi);
         incText.setText(inc);
         hisText.setText(his);
-        
+
+        //setPivot sets the rotational pivot for the rotation
+
+        pointer.setRotation(Float.parseFloat(azi));
     }
 
     @Override
