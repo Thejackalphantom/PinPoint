@@ -23,9 +23,9 @@ namespace DDUEmulator
         public enum LogMsgType { Incoming, Outgoing, Normal, Warning, Error };
 
         //Instanciates the variable's
-        private int degreeDDU = 0;
-        private int inclinationDDU = 0;
-        private int hsnDDU = 0;
+        private double degreeDDU = 0.00;
+        private double inclinationDDU = 0.00;
+        private double hsnDDU = 0.00;
 
         public Form1()
         {
@@ -33,9 +33,9 @@ namespace DDUEmulator
             InitializeComponent();
 
             //Sets the label text to a default value the gods will be happy this is one.
-            label4.Text = "0";
-            label5.Text = "0";
-            label6.Text = "0";
+            label4.Text = "000.00";
+            label5.Text = "000.00";
+            label6.Text = "000.00";
             timerSentData.Enabled = true;
 
             // Fixes the border so it cannot be resized.
@@ -57,20 +57,11 @@ namespace DDUEmulator
             {
                 rtfTerminal.SelectedText = string.Empty;
                 rtfTerminal.SelectionFont = new Font(rtfTerminal.SelectionFont, FontStyle.Bold);
-                //rtfTerminal.SelectionColor = LogMsgTypeColor[(int)msgtype];
                 rtfTerminal.AppendText(msg);
                 rtfTerminal.Text += (msg);
-                //rtfTerminal.AppendText("\r\n");
-                /*if (rtfTerminal.Text.Length > 0x100)
-                {
-                    rtfTerminal.Text = "";
-                }*/
-                //rtfTerminal.Text = (msg);
                 rtfTerminal.ScrollToCaret();
             }));
         }
-
-        int counter = 0;
 
         private void TimerSentData_Tick(object sender, EventArgs e)
         {
@@ -79,11 +70,9 @@ namespace DDUEmulator
                 Console.WriteLine("Running");
                 //counter++;
                 //Sets the string that will be outputed via the serial controller with the inputed values
-                String dataOut = "$tab02," + inclinationDDU.ToString() + "," + degreeDDU.ToString() + "," + hsnDDU.ToString() + "\r\n";
+                String dataOut = "$tab02," + inclinationDDU.ToString().PadLeft(3, '0').PadRight(4, '.').PadRight(6, '0') + "," + degreeDDU.ToString().PadLeft(3, '0').PadRight(4, '.').PadRight(6, '0') + "," + hsnDDU.ToString().PadLeft(3, '0').PadRight(4, '.').PadRight(6, '0') + "\r\n";
 
                 serialPortDDU.Write(dataOut);
-                //Console.WriteLine(counter.ToString, "");
-                //Console.WriteLine(dataOut);
                 Log(LogMsgType.Incoming, dataOut);
             }
 
@@ -103,7 +92,6 @@ namespace DDUEmulator
             }
             catch
             {
-
             }
         }
 
@@ -126,7 +114,6 @@ namespace DDUEmulator
             {
                 toolStripComboBoxPort.Items.Add("No Device detected");
                 toolStripBtnConnect.Enabled = false;
-
             }
         }
 
@@ -143,17 +130,12 @@ namespace DDUEmulator
                 serialPortDDU.NewLine = "\r";
                 // now open the port
                 serialPortDDU.Open();
-
                 // display message
                 toolStripBtnConnect.Enabled = false;
                 toolStripBtnDisconnect.Enabled = true;
-
-
             }
             catch
             {
-
-
             }
         }
 
@@ -163,12 +145,9 @@ namespace DDUEmulator
             {
                 if (serialPortDDU.IsOpen)
                 {
-
-
                     serialPortDDU.Close();
                     toolStripBtnDisconnect.Enabled = false;
                     toolStripBtnConnect.Enabled = true;
-
                 }
             }
             catch
@@ -182,7 +161,6 @@ namespace DDUEmulator
             {
                 settings.Port = toolStripComboBoxPort.SelectedItem.ToString();
                 settings.Save();
-
             }
             catch
             {
@@ -193,21 +171,21 @@ namespace DDUEmulator
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             degreeDDU = trackBar1.Value;
-            label4.Text = degreeDDU.ToString();
+            label4.Text = degreeDDU.ToString().PadLeft(3, '0').PadRight(4, '.').PadRight(6, '0');
         }
 
         //sets the Hightside value to the relative position of the trackbar and displays it to the text of the label.
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             hsnDDU = trackBar2.Value;
-            label5.Text = hsnDDU.ToString();
+            label5.Text = hsnDDU.ToString().PadLeft(3, '0').PadRight(4, '.').PadRight(6, '0');
         }
 
         //sets the inclination value to the relative position of the trackbar and displays it to the text of the label.
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
             inclinationDDU = trackBar3.Value;
-            label6.Text = inclinationDDU.ToString();
+            label6.Text = inclinationDDU.ToString().PadLeft(3, '0').PadRight(4, '.').PadRight(6, '0');
         }
     }
 }
