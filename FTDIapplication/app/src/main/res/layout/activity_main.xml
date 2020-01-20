@@ -7,33 +7,56 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/yesData"
-        android:layout_width="204dp"
-        android:layout_height="80dp"
+        android:id="@+id/azimuthView"
+        android:layout_width="272dp"
+        android:layout_height="54dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/recievingdata" />
+        app:srcCompat="@drawable/azimuth" />
+
+    <ImageView
+        android:id="@+id/inclinationView"
+        android:layout_width="272dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/yesData"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/azimuthView"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/inclination" />
 
     <ImageView
         android:id="@+id/noData"
-        android:layout_width="201dp"
-        android:layout_height="81dp"
-        app:layout_constraintBottom_toBottomOf="@+id/yesData"
-        app:layout_constraintEnd_toEndOf="@+id/yesData"
-        app:layout_constraintStart_toStartOf="@+id/yesData"
-        app:layout_constraintTop_toTopOf="@+id/yesData"
+        android:layout_width="272dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inclinationView"
         app:srcCompat="@drawable/nodata" />
+
+    <ImageView
+        android:id="@+id/yesData"
+        android:layout_width="272dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="37dp"
+        app:layout_constraintBottom_toTopOf="@+id/compass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/yesdata" />
 
     <EditText
         android:id="@+id/inclination"
         android:layout_width="110dp"
         android:layout_height="61dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="48dp"
         android:clickable="false"
         android:editable="false"
         android:ems="10"
@@ -41,16 +64,15 @@
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noData" />
+        app:layout_constraintBottom_toBottomOf="@+id/inclinationView"
+        app:layout_constraintEnd_toEndOf="@+id/inclinationView"
+        app:layout_constraintStart_toStartOf="@+id/inclinationView"
+        app:layout_constraintTop_toTopOf="@+id/inclinationView" />
 
     <EditText
         android:id="@+id/azimuthDegrees"
         android:layout_width="105dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="48dp"
         android:clickable="false"
         android:editable="false"
         android:ems="10"
@@ -58,19 +80,18 @@
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        app:layout_constraintEnd_toStartOf="@+id/heightside"
-        app:layout_constraintStart_toEndOf="@+id/inclination"
-        app:layout_constraintTop_toBottomOf="@+id/noData" />
+        app:layout_constraintBottom_toBottomOf="@+id/azimuthView"
+        app:layout_constraintEnd_toEndOf="@+id/azimuthView"
+        app:layout_constraintStart_toStartOf="@+id/azimuthView"
+        app:layout_constraintTop_toTopOf="@+id/azimuthView" />
 
     <EditText
         android:id="@+id/heightside"
         android:layout_width="104dp"
         android:layout_height="56dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="143dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginRight="34dp"
+        android:layout_marginStart="247dp"
+        android:layout_marginLeft="247dp"
+        android:layout_marginBottom="317dp"
         android:clickable="false"
         android:editable="false"
         android:ems="10"
@@ -78,32 +99,38 @@
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/azimuthDegrees"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/compass"
+        app:layout_constraintStart_toStartOf="@+id/compass"
+        app:layout_constraintTop_toTopOf="@+id/compass" />
 
     <ImageView
         android:id="@+id/compass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/azimuthDegrees"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/compass" />
 
     <ImageView
         android:id="@+id/pointer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginLeft="174dp"
-        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/compass"
+        app:layout_constraintEnd_toEndOf="@+id/compass"
         app:layout_constraintStart_toStartOf="@+id/compass"
+        app:layout_constraintTop_toTopOf="@+id/compass"
         app:srcCompat="@drawable/pointer" />
+
+    <ImageView
+        android:id="@+id/logoView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/pinpoint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         //setText writes the text to the app
         aziText.setText(azi);
         incText.setText(inc);
-        hisText.setText(his);
+        hisText.setText(his + "°");
 
         //setPivot sets the rotational pivot for the rotation
         pointer.setRotation(Float.parseFloat(azi));
