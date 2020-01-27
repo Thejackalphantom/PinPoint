@@ -127,10 +127,19 @@
         android:id="@+id/logoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="342dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/compass"
         app:srcCompat="@drawable/pinpoint" />
+
+    <ImageView
+        android:id="@+id/madeByStudentsLogo"
+        android:layout_width="198dp"
+        android:layout_height="176dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compass"
+        app:srcCompat="@drawable/stendenmadebystudents" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
