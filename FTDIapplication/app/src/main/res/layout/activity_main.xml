@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="azimuth"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/azimuth" />
@@ -48,7 +49,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toTopOf="@+id/compass"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/yesdata" />
@@ -64,6 +65,7 @@
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/inclinationView"
         app:layout_constraintEnd_toEndOf="@+id/inclinationView"
         app:layout_constraintStart_toStartOf="@+id/inclinationView"
@@ -80,6 +82,7 @@
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/azimuthView"
         app:layout_constraintEnd_toEndOf="@+id/azimuthView"
         app:layout_constraintStart_toStartOf="@+id/azimuthView"
@@ -129,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="342dp"
+        android:layout_marginTop="328dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/compass"
         app:srcCompat="@drawable/pinpoint" />
