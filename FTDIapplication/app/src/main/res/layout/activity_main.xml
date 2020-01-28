@@ -10,10 +10,11 @@
         android:id="@+id/azimuthView"
         android:layout_width="272dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="159dp"
         android:contentDescription="azimuth"
+        app:layout_constraintBottom_toTopOf="@+id/compass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/azimuth" />
@@ -22,42 +23,44 @@
         android:id="@+id/inclinationView"
         android:layout_width="272dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/yesData"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="97dp"
+        app:layout_constraintBottom_toTopOf="@+id/compass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/azimuthView"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/inclination" />
 
     <ImageView
         android:id="@+id/noData"
         android:layout_width="272dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/compass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inclinationView"
+        app:layout_constraintVertical_bias="0.26"
         app:srcCompat="@drawable/nodata" />
 
     <ImageView
         android:id="@+id/yesData"
         android:layout_width="272dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/compass"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/noData"
+        app:layout_constraintEnd_toEndOf="@+id/noData"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/noData"
+        app:layout_constraintTop_toTopOf="@+id/noData"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/yesdata" />
 
     <EditText
         android:id="@+id/inclination"
         android:layout_width="110dp"
         android:layout_height="61dp"
+        android:layout_marginTop="2dp"
         android:clickable="false"
         android:editable="false"
         android:ems="10"
@@ -94,7 +97,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="247dp"
         android:layout_marginLeft="247dp"
-        android:layout_marginBottom="317dp"
+        android:layout_marginBottom="305dp"
         android:clickable="false"
         android:editable="false"
         android:ems="10"
@@ -110,10 +113,11 @@
         android:id="@+id/compass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@drawable/compass" />
 
     <ImageView
@@ -122,6 +126,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/compass"
         app:layout_constraintEnd_toEndOf="@+id/compass"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/compass"
         app:layout_constraintTop_toTopOf="@+id/compass"
         app:srcCompat="@drawable/pointer" />
@@ -132,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="330dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/compass"
         app:srcCompat="@drawable/pinpoint" />
@@ -141,7 +146,9 @@
         android:id="@+id/madeByStudentsLogo"
         android:layout_width="198dp"
         android:layout_height="176dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        app:layout_constraintStart_toEndOf="@+id/logoView"
         app:layout_constraintTop_toBottomOf="@+id/compass"
         app:srcCompat="@drawable/stendenmadebystudents" />
 
