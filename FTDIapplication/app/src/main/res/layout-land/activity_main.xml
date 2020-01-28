@@ -10,10 +10,10 @@
         android:id="@+id/azimuthView"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="9dp"
         android:contentDescription="azimuth"
         app:layout_constraintEnd_toStartOf="@+id/compass"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inclinationView"
         app:srcCompat="@drawable/azimuth" />
@@ -24,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/compass"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/inclination" />
@@ -43,11 +43,12 @@
         android:id="@+id/yesData"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/logoView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/compass"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/azimuthView"
-        app:layout_constraintVertical_bias="0.22000003"
+        app:layout_constraintVertical_bias="0.050000012"
         app:srcCompat="@drawable/yesdata" />
 
     <EditText
@@ -87,7 +88,7 @@
 
     <EditText
         android:id="@+id/heightside"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
         android:clickable="false"
         android:editable="false"
@@ -96,12 +97,12 @@
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@+id/compass"
-        app:layout_constraintEnd_toEndOf="@+id/compass"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/compass"
-        app:layout_constraintTop_toTopOf="@+id/compass"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13999999" />
 
     <ImageView
         android:id="@+id/compass"
