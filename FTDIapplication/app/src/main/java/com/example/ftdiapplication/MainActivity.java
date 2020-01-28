@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements USBSerialListener
         hisText.setText(his + "°");
 
         //setPivot sets the rotational pivot for the rotation
-        pointer.setRotation(Float.parseFloat(azi));
+        pointer.setRotation(Float.parseFloat(his));
     }
 
     @Override
