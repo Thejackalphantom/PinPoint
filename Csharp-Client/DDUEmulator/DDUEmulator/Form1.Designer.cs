@@ -82,21 +82,21 @@
             this.toolStripSeparator3});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip2.Size = new System.Drawing.Size(516, 39);
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.toolStrip2.Size = new System.Drawing.Size(688, 39);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(29, 36);
+            this.toolStripLabel2.Size = new System.Drawing.Size(35, 36);
             this.toolStripLabel2.Text = "Port";
             // 
             // toolStripComboBoxPort
             // 
             this.toolStripComboBoxPort.Name = "toolStripComboBoxPort";
-            this.toolStripComboBoxPort.Size = new System.Drawing.Size(121, 39);
+            this.toolStripComboBoxPort.Size = new System.Drawing.Size(160, 39);
             // 
             // toolStripSeparator1
             // 
@@ -137,48 +137,54 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.rtfTerminal);
-            this.groupBox3.Location = new System.Drawing.Point(0, 42);
+            this.groupBox3.Location = new System.Drawing.Point(0, 52);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(506, 177);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(675, 218);
             this.groupBox3.TabIndex = 28;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Data out";
             // 
             // rtfTerminal
             // 
-            this.rtfTerminal.Location = new System.Drawing.Point(6, 19);
+            this.rtfTerminal.Location = new System.Drawing.Point(8, 23);
+            this.rtfTerminal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rtfTerminal.Name = "rtfTerminal";
             this.rtfTerminal.ReadOnly = true;
-            this.rtfTerminal.Size = new System.Drawing.Size(494, 153);
+            this.rtfTerminal.Size = new System.Drawing.Size(657, 187);
             this.rtfTerminal.TabIndex = 9;
             this.rtfTerminal.Text = "";
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(6, 241);
+            this.trackBar1.Location = new System.Drawing.Point(8, 297);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.trackBar1.Maximum = 360;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(240, 45);
+            this.trackBar1.Size = new System.Drawing.Size(320, 56);
             this.trackBar1.TabIndex = 29;
             this.trackBar1.Tag = "";
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // trackBar2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(266, 241);
-            this.trackBar2.Maximum = 180;
+            this.trackBar2.Location = new System.Drawing.Point(355, 297);
+            this.trackBar2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar2.Maximum = 360;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(234, 45);
+            this.trackBar2.Size = new System.Drawing.Size(312, 56);
             this.trackBar2.TabIndex = 30;
             this.trackBar2.Value = 90;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // trackBar3
             // 
-            this.trackBar3.Location = new System.Drawing.Point(6, 314);
-            this.trackBar3.Maximum = 180;
+            this.trackBar3.Location = new System.Drawing.Point(8, 386);
+            this.trackBar3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar3.Maximum = 360;
             this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(240, 45);
+            this.trackBar3.Size = new System.Drawing.Size(320, 56);
             this.trackBar3.TabIndex = 31;
             this.trackBar3.Value = 180;
             this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
@@ -186,36 +192,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 222);
+            this.label1.Location = new System.Drawing.Point(16, 273);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 33;
             this.label1.Text = "Degrees";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(263, 217);
+            this.label2.Location = new System.Drawing.Point(351, 267);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(67, 17);
             this.label2.TabIndex = 34;
             this.label2.Text = "Hightside";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 289);
+            this.label3.Location = new System.Drawing.Point(16, 356);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.Size = new System.Drawing.Size(71, 17);
             this.label3.TabIndex = 35;
             this.label3.Text = "inclination";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(15, 408);
+            this.pictureBox1.Location = new System.Drawing.Point(20, 502);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(171, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(228, 111);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 36;
             this.pictureBox1.TabStop = false;
@@ -223,9 +233,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(359, 383);
+            this.pictureBox2.Location = new System.Drawing.Point(479, 471);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(145, 131);
+            this.pictureBox2.Size = new System.Drawing.Size(193, 161);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 37;
             this.pictureBox2.TabStop = false;
@@ -234,9 +245,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(396, 289);
+            this.label4.Location = new System.Drawing.Point(528, 356);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 18);
+            this.label4.Size = new System.Drawing.Size(62, 23);
             this.label4.TabIndex = 38;
             this.label4.Text = "label4";
             // 
@@ -244,9 +256,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(396, 314);
+            this.label5.Location = new System.Drawing.Point(528, 386);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 18);
+            this.label5.Size = new System.Drawing.Size(62, 23);
             this.label5.TabIndex = 39;
             this.label5.Text = "label5";
             // 
@@ -254,9 +267,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(396, 341);
+            this.label6.Location = new System.Drawing.Point(528, 420);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 18);
+            this.label6.Size = new System.Drawing.Size(62, 23);
             this.label6.TabIndex = 40;
             this.label6.Text = "label6";
             // 
@@ -264,9 +278,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(297, 289);
+            this.label7.Location = new System.Drawing.Point(396, 356);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 18);
+            this.label7.Size = new System.Drawing.Size(85, 23);
             this.label7.TabIndex = 41;
             this.label7.Text = "Degrees";
             // 
@@ -274,9 +289,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(297, 314);
+            this.label8.Location = new System.Drawing.Point(396, 386);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 18);
+            this.label8.Size = new System.Drawing.Size(90, 23);
             this.label8.TabIndex = 42;
             this.label8.Text = "Hightside";
             // 
@@ -284,17 +300,18 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(297, 341);
+            this.label9.Location = new System.Drawing.Point(396, 420);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 18);
+            this.label9.Size = new System.Drawing.Size(94, 23);
             this.label9.TabIndex = 43;
             this.label9.Text = "inclination";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 526);
+            this.ClientSize = new System.Drawing.Size(688, 647);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -311,7 +328,7 @@
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.toolStrip2);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "PinPoint Debug Tool";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
